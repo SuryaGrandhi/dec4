@@ -1,12 +1,10 @@
 #ifndef REDUCTION_H_
 #define REDUCTION_H_
-
-#include <cstddef>
-#include <type_traits>
-#include "definitions.h"
-#include "rocblas.h"
 #include "handle.h"
-#include <hip/hip_runtime.h>
+#include "rocblas.h"
+#include "utility.h"
+#include <type_traits>
+#include <utility>
 
 /*
  * ===========================================================================
@@ -143,7 +141,10 @@ struct rocblas_finalize_identity
 template <typename T>
 struct default_value
 {
-    __forceinline__ __host__ __device__ constexpr T operator()() const { return {}; }
+    __forceinline__ __host__ __device__ constexpr T operator()() const
+    {
+        return {};
+    }
 };
 
 // kennel 1 writes partial results per thread block in workspace; number of partial results is
@@ -153,11 +154,12 @@ template <rocblas_int NB,
           typename REDUCE = rocblas_reduce_sum,
           typename Ti,
           typename To>
+__attribute__((amdgpu_flat_work_group_size((NB < 128) ? NB : 128, (NB > 256) ? NB : 256)))
 __global__ void
-rocblas_reduction_kernel_part1(rocblas_int n, const Ti* x, rocblas_int incx, To* workspace)
+    rocblas_reduction_kernel_part1(rocblas_int n, const Ti* x, rocblas_int incx, To* workspace)
 {
-    ssize_t tx  = hipThreadIdx_x;
-    ssize_t tid = hipBlockIdx_x * hipBlockDim_x + tx;
+    ptrdiff_t     tx  = hipThreadIdx_x;
+    ptrdiff_t     tid = hipBlockIdx_x * hipBlockDim_x + tx;
     __shared__ To tmp[NB];
 
     // bound
@@ -179,9 +181,11 @@ template <rocblas_int NB,
           typename FINALIZE = rocblas_finalize_identity,
           typename To,
           typename Tr>
-__global__ void rocblas_reduction_kernel_part2(rocblas_int nblocks, To* workspace, Tr* result)
+__attribute__((amdgpu_flat_work_group_size((NB < 128) ? NB : 128, (NB > 256) ? NB : 256)))
+__global__ void
+    rocblas_reduction_kernel_part2(rocblas_int nblocks, To* workspace, Tr* result)
 {
-    rocblas_int tx = hipThreadIdx_x;
+    rocblas_int   tx = hipThreadIdx_x;
     __shared__ To tmp[NB];
 
     if(tx < nblocks)
@@ -214,7 +218,7 @@ __global__ void rocblas_reduction_kernel_part2(rocblas_int nblocks, To* workspac
 
     // Store result on device or in workspace
     if(tx == 0)
-        *result = FINALIZE{}(tmp[0]);
+        *result = Tr(FINALIZE{}(tmp[0]));
 }
 
 // At least two kernels are needed to finish the reduction
@@ -229,10 +233,10 @@ template <rocblas_int NB,
           typename Tr>
 rocblas_status rocblas_reduction_kernel(rocblas_handle __restrict__ handle,
                                         rocblas_int n,
-                                        const Ti* x,
+                                        const Ti*   x,
                                         rocblas_int incx,
-                                        Tr* result,
-                                        To* workspace,
+                                        Tr*         result,
+                                        To*         workspace,
                                         rocblas_int blocks)
 {
     hipLaunchKernelGGL((rocblas_reduction_kernel_part1<NB, FETCH, REDUCE>),
@@ -261,7 +265,7 @@ rocblas_status rocblas_reduction_kernel(rocblas_handle __restrict__ handle,
         // If in host pointer mode, workspace is converted to Tr* and the result is
         // placed there, and then copied from device to host. If To is a class type,
         // it must be a standard layout type and its first member must be of type Tr.
-        static_assert(std::is_standard_layout<To>(), "To must be a standard layout type");
+        static_assert(std::is_standard_layout<To>{}, "To must be a standard layout type");
 
         if(blocks > 1)
         {
@@ -275,7 +279,7 @@ rocblas_status rocblas_reduction_kernel(rocblas_handle __restrict__ handle,
                                (Tr*)workspace);
         }
 
-        if(std::is_same<FINALIZE, rocblas_finalize_identity>() || blocks > 1)
+        if(std::is_same<FINALIZE, rocblas_finalize_identity>{} || blocks > 1)
         {
             // If FINALIZE is trivial or kernel part2 was called, result is in the
             // beginning of workspace[0], and can be copied directly.
