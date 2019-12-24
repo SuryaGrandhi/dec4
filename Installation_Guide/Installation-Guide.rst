@@ -23,7 +23,7 @@ This page describes the features, fixed issues, and information about downloadin
    -  `MIGraph v0.5 Graph Optimizer`_
 
 
--  `Known Issues`_
+-  `Known Issues in This Release`_
 
    -  `Installation Issue with Red Hat Enterprise Linux v7.7`_
    -  `Error While Running rocProfiler on SLES`_
@@ -214,19 +214,19 @@ rhel-7-server-optional-rpms
 
 $sudo subscription-manager repos --enable=rhel-7-workstation-optional-rpms
 
-|| You will see the following message:
+You will see the following message:
 
 Repository 'rhel-7-workstation-optional-rpms' is enabled for this system.
 
-|| If the following error message appears,
+If the following error message appears,
 
 Error: 'rhel-7-workstation-optional-rpms' does not match a valid repository ID. Use "subscription-manager repos --list" to see valid repositories.
 
-|| Use
+Use
 
 $sudo subscription-manager repos --enable=rhel-7-server-optional-rpms
 
-|| You will see the following message:
+You will see the following message:
 
 Repository 'rhel-7-server-optional-rpms' is enabled for this system.
 
@@ -280,7 +280,7 @@ The following features are deprecated in the AMD ROCm v3.0 release.
 .. _MIOpen:
 
 MIOpen
-^^^^^^^^
+~~~~~~~
 
 .. _SCGEMM Convolution Algorithmn:
 
@@ -480,6 +480,7 @@ Note: The following steps do not apply to the CentOS installation.
 2. Enable the following repositories:
 
 ::
+   
     sudo subscription-manager repos --enable rhel-server-rhscl-7-rpms 
     sudo subscription-manager repos --enable rhel-7-server-optional-rpms
     sudo subscription-manager repos --enable rhel-7-server-extras-rpms
@@ -1031,7 +1032,7 @@ The latest supported version of the drivers, tools, libraries and source code fo
    -  `hipSPARSE`_
    -  `rocALUTION`_
    -  `MIOpenGEMM`_
-   -  `MIOpen`_
+   -  `MIopen`_
    -  `rocThrust`_
    -  `ROCm SMI Lib`_
    -  `RCCL`_
@@ -1066,7 +1067,7 @@ The latest supported version of the drivers, tools, libraries and source code fo
 .. _ROC Tracer: https://github.com/ROCm-Developer-Tools/roctracer/tree/roc-3.0.x
 .. _AOMP: https://github.com/ROCm-Developer-Tools/aomp/tree/roc-3.0.0
 .. _Radeon Compute Profiler: https://github.com/GPUOpen-Tools/RCP/tree/3a49405
-.. _ROCmValidationSuite: https://github.com/ROCm-Developer-Tools/ROCmValidationSuite/tree/roc-3.0.0
+.. _ROCm Validation Suite: https://github.com/ROCm-Developer-Tools/ROCmValidationSuite/tree/roc-3.0.0
 .. _HCC Examples: https://github.com/ROCm-Developer-Tools/HCC-Example-Application/tree/ffd65333
 .. _HIP Examples: https://github.com/ROCm-Developer-Tools/HIP-Examples/tree/roc-3.0.0
 
@@ -1078,7 +1079,7 @@ The latest supported version of the drivers, tools, libraries and source code fo
 .. _hipSPARSE: https://github.com/ROCmSoftwarePlatform/hipSPARSE/tree/rocm-3.0
 .. _rocALUTION: https://github.com/ROCmSoftwarePlatform/rocALUTION/tree/rocm-3.0
 .. _MIOpenGEMM: https://github.com/ROCmSoftwarePlatform/MIOpenGEMM/tree/6275a879
-.. _MIOpen: https://github.com/ROCmSoftwarePlatform/MIOpen/tree/roc-3.0.0
+.. _MIopen: https://github.com/ROCmSoftwarePlatform/MIOpen/tree/roc-3.0.0
 .. _rocThrust: https://github.com/ROCmSoftwarePlatform/rocThrust/tree/3.0.0
 .. _ROCm SMI Lib: https://github.com/RadeonOpenCompute/rocm_smi_lib/tree/roc.3.0.0
 .. _RCCL: https://github.com/ROCmSoftwarePlatform/rccl/tree/3.0.0
