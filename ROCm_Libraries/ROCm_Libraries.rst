@@ -799,7 +799,7 @@ rocblas_<type>trsv()
 .. doxygenfunction:: rocblas_dtrsv
    :project: rocBLAS
 
-.. doxygenfunction:: rocblas_strsv
+.. doxygenfunction:: rocblas_strsvrocblas_zgemv_strided_batched
    :project: rocBLAS
 
 rocblas_<type>trsv_batched()
