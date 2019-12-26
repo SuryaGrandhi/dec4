@@ -32,7 +32,7 @@ This page describes the features, fixed issues, and information about downloadin
 
 -  `Deprecated Features`_
  
-   `MIOpen`_
+-  `MI`_
 
    -  `SCGEMM Convolution Algorithmn`_
    -  `Text-Based Performance Database`_
@@ -135,8 +135,7 @@ Support for CentOS RHEL v7.7
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Support is extended for CentOS/RHEL v7.7 in the ROCm v3.0 release. For more information about the CentOS/RHEL v7.7 release, see:
-
-'CentOS/RHEL <https://centos.org/forums/viewtopic.php?t=71657>`_
+https://centos.org/forums/viewtopic.php?t=71657.
 
 .. _Initial distribution of AOMP 0.7-5 in ROCm v3.0:
 
@@ -204,15 +203,24 @@ Installation Issue with Red Hat Enterprise Linux v7.7
 
 For workstations, use
 
-rhel-7-workstation-optional-rpms
+:: 
+
+   rhel-7-workstation-optional-rpms
+
 
 For servers, use
 
-rhel-7-server-optional-rpms
+::
+
+   rhel-7-server-optional-rpms
+
 
 **To install**
 
-$sudo subscription-manager repos --enable=rhel-7-workstation-optional-rpms
+::
+
+   $sudo subscription-manager repos --enable=rhel-7-workstation-optional-rpms
+
 
 You will see the following message:
 
@@ -224,7 +232,10 @@ Error: 'rhel-7-workstation-optional-rpms' does not match a valid repository ID. 
 
 Use
 
-$sudo subscription-manager repos --enable=rhel-7-server-optional-rpms
+::
+ 
+   $sudo subscription-manager repos --enable=rhel-7-server-optional-rpms
+
 
 You will see the following message:
 
@@ -245,7 +256,10 @@ ImportError: No module named sqlite3
 
     1. Run the following command
 
-sudo vi /opt/rocm/bin/rocprof
+::
+
+   sudo vi /opt/rocm/bin/rocprof
+
 
     2. Change Python to Python3.6.
 
@@ -255,7 +269,9 @@ sudo vi /opt/rocm/bin/rocprof
 
 â€¢ Run the following command:
 
-alias python=python3.6
+::
+
+   alias python=python3.6
 
 
 .. _gpuOwl Fails with Memory Access Fault Error:
@@ -277,7 +293,7 @@ Deprecated Features
 
 The following features are deprecated in the AMD ROCm v3.0 release.
 
-.. _MIOpen:
+.. _MI:
 
 MIOpen
 ~~~~~~~
@@ -488,7 +504,10 @@ Note: The following steps do not apply to the CentOS installation.
 
 3. Enable additional repositories by downloading and installing the epel-release-latest-7 repository RPM:
 
-       sudo rpm -ivh
+::
+
+   sudo rpm -ivh
+
 
 For more details, see https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 
@@ -534,7 +553,10 @@ Note: The URL of the repository must point to the location of the repositoriesâ€
 
 3. Install ROCm components using the following command:
 
+::
+
     sudo yum install rocm-dkms
+
 
 4. Restart the system. The rock-dkms component is installed and the /dev/kfd device is now available.
 
@@ -1032,7 +1054,7 @@ The latest supported version of the drivers, tools, libraries and source code fo
    -  `hipSPARSE`_
    -  `rocALUTION`_
    -  `MIOpenGEMM`_
-   -  `MIopen`_
+   -  `M`_
    -  `rocThrust`_
    -  `ROCm SMI Lib`_
    -  `RCCL`_
@@ -1079,7 +1101,7 @@ The latest supported version of the drivers, tools, libraries and source code fo
 .. _hipSPARSE: https://github.com/ROCmSoftwarePlatform/hipSPARSE/tree/rocm-3.0
 .. _rocALUTION: https://github.com/ROCmSoftwarePlatform/rocALUTION/tree/rocm-3.0
 .. _MIOpenGEMM: https://github.com/ROCmSoftwarePlatform/MIOpenGEMM/tree/6275a879
-.. _MIopen: https://github.com/ROCmSoftwarePlatform/MIOpen/tree/roc-3.0.0
+.. _M: https://github.com/ROCmSoftwarePlatform/MIOpen/tree/roc-3.0.0
 .. _rocThrust: https://github.com/ROCmSoftwarePlatform/rocThrust/tree/3.0.0
 .. _ROCm SMI Lib: https://github.com/RadeonOpenCompute/rocm_smi_lib/tree/roc.3.0.0
 .. _RCCL: https://github.com/ROCmSoftwarePlatform/rccl/tree/3.0.0
