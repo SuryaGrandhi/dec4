@@ -32,7 +32,7 @@ This page describes the features, fixed issues, and information about downloadin
 
 -  `Deprecated Features`_
  
--  MIOPEN
+-  `miopen`_
 
    -  `SCGEMM Convolution Algorithmn`_
    -  `Text-Based Performance Database`_
@@ -293,6 +293,7 @@ Deprecated Features
 
 The following features are deprecated in the AMD ROCm v3.0 release.
 
+.. _miopen:
 
 MIOpen
 ~~~~~~~
