@@ -1,3 +1,5 @@
+.. _AOMP developers README:
+
 AOMP Developer README.md
 ****************************
 
