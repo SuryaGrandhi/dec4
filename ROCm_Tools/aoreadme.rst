@@ -39,7 +39,9 @@ Repositories
 
 The clone_aomp.sh script clones the necessary repositories and the correct branches into subdirectories of $HOME/git/aomp (or $AOMP_REPOS if set) The repositories needed by AOMP are shown in the following table. The first column is the AOMP component that uses the repositories.
 
+====================       ========================================     =========================
 Component 	             SUBDIRECTORY 	                        REPOSITORY LINKS
+====================       ========================================     =========================
 roct 	                     $HOME/git/aomp/roct-thunk-interfaces 	roct-thunk-interfaces
 rocr 	                     $HOME/git/aomp/rocr-runtime 	        rocr-runtime
 llvm-project 	             $HOME/git/aomp/llvm-project 	        llvm-project
@@ -53,6 +55,7 @@ libdevice 	             $HOME/git/aomp/rocm-device-libs 	        rocm-device-lib
 flang 	                     $HOME/git/aomp/flang 	                flang
 rocminfo 	             $HOME/git/aomp/rocminfo 	                rocminfo
 	                     $HOME/git/aomp/openmpapps 	                openmpapps
+====================       ========================================     =========================
 
 The scripts and example makefiles use these environment variables and these defaults if they are not set. This is not a complete list. See the script headers for other environment variables that you may override including repo names.
 
